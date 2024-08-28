@@ -13,8 +13,10 @@ const Sidebar = () => {
   const navigateTo = (path: string) => {
     router.push(path);
   };
-
-  const isActive = (path: string) => pathname === path;
+  const isActive = (path: string) => {
+    // Check if the current pathname starts with the given path
+    return pathname.startsWith(path);
+  };
 
   return (
     <div>

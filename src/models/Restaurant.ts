@@ -4,8 +4,8 @@ export interface IRestaurant extends Document {
   name: string;
   owner_id: mongoose.Schema.Types.ObjectId;
   location?: string;
-  description?: string;
-  open_hours?: string;
+  description: string;
+  open_hours: string;
   created_at: Date;
   updated_at: Date;
 }

@@ -15,6 +15,7 @@ export default async function RestaurantMenusPage({
   return (
     <Suspense fallback={<MenusLoading />}>
       <RestaurantMenus menus={menus} />
+      {/* <MenusLoading /> */}
     </Suspense>
   );
 }

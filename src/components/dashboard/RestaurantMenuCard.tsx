@@ -1,5 +1,6 @@
 "use client";
 import { IMenu, IMenuItem } from "@/models/Menu";
+import { Button } from "../ui/button";
 
 const RestaurantMenus = ({ menus }: { menus: IMenu }) => {
   console.log(menus);
@@ -32,9 +33,9 @@ const RestaurantMenus = ({ menus }: { menus: IMenu }) => {
               )}
             </div>
             <div className="bg-gray-100 p-4 rounded-b-lg">
-              <button className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors duration-300">
+              <Button className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors duration-300">
                 Batafsil
-              </button>
+              </Button>
             </div>
           </div>
         ))}

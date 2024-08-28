@@ -38,3 +38,28 @@ export async function getMenusByRestaurantId(id: string) {
     return [];
   }
 }
+
+export async function postRestaurant(data: string) {
+  try {
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/restaurants`,
+      data
+    );
+    return response.data.data;
+  } catch (error) {
+    console.error("Error creating restaurant:", error);
+    return null;
+  }
+}
+
+export async function getResturantOwners() {
+  try {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/users`
+    );
+    return response.data.data;
+  } catch (error) {
+    console.error("Error fetching restaurant owners:", error);
+    return [];
+  }
+}
