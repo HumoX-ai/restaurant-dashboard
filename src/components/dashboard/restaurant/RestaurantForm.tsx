@@ -10,16 +10,16 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "../ui/input";
-import { Textarea } from "../ui/textarea";
-import { Button } from "../ui/button";
+import { Input } from "../../ui/input";
+import { Textarea } from "../../ui/textarea";
+import { Button } from "../../ui/button";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
+} from "../../ui/select";
 import axios from "axios";
 import { restaurantSchema } from "./schema";
 

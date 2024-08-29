@@ -1,25 +1,27 @@
+"use client";
 import { useAppDispatch } from "@/store/hooks";
 import { addRestaurant } from "@/store/restaurantsSlice";
 import { useState } from "react";
 import { z } from "zod";
-import { Button } from "../ui/button";
-import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
-import RestaurantForm from "./RestaurantForm";
-import { restaurantSchema } from "./schema";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { usersSchema } from "./schema";
+import UsersForm from "./UsersForm";
+import { addUsers } from "@/store/usersSlice";
 
-const AddRestaurantButton = () => {
+const AddUsersButton = () => {
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleCreate = (values: z.infer<typeof restaurantSchema>) => {
+  const handleCreate = (values: z.infer<typeof usersSchema>) => {
     setIsLoading(true);
-    const restaurantData = {
+    const usersData = {
       ...values,
-      location: values.location || "",
+      createdAt: new Date().toISOString(),
     };
 
-    dispatch(addRestaurant(restaurantData))
+    dispatch(addUsers(usersData))
       .unwrap()
       .then(() => {
         setOpen(false);
@@ -34,11 +36,11 @@ const AddRestaurantButton = () => {
 
   return (
     <div>
-      <Button onClick={() => setOpen(true)}>Restoran qo&#39;shish</Button>
+      <Button onClick={() => setOpen(true)}>Foydalanuvchi qo&#39;shish</Button>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
-          <DialogTitle>Yangi restoran qo&#39;shish</DialogTitle>
-          <RestaurantForm
+          <DialogTitle>Yangi foydalanuvchi qo&#39;shish</DialogTitle>
+          <UsersForm
             onSubmit={handleCreate}
             isLoading={isLoading}
             mode="create"
@@ -49,4 +51,4 @@ const AddRestaurantButton = () => {
   );
 };
 
-export default AddRestaurantButton;
+export default AddUsersButton;

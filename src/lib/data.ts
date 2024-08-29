@@ -52,14 +52,14 @@ export async function postRestaurant(data: string) {
   }
 }
 
-export async function getResturantOwners() {
+export async function getUsers(query: string) {
   try {
     const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/users`
+      `${process.env.NEXT_PUBLIC_API_URL}/api/users?${query}`
     );
     return response.data.data;
   } catch (error) {
-    console.error("Error fetching restaurant owners:", error);
+    console.error("Error fetching restaurants:", error);
     return [];
   }
 }

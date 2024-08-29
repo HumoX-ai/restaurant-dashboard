@@ -1,16 +1,15 @@
 "use client";
-import { useRouter } from "next/navigation";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useAppDispatch } from "@/store/hooks";
 import { deleteRestaurant, updateRestaurant } from "@/store/restaurantsSlice";
 import { Trash2, Edit } from "lucide-react";
-import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 
-import RestaurantForm from "./RestaurantForm";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import { restaurantSchema } from "./schema";
+import RestaurantForm from "./RestaurantForm";
 
 interface RestaurantCardProps {
   restaurant: {
@@ -24,7 +23,6 @@ interface RestaurantCardProps {
 }
 
 const RestaurantCard: React.FC<RestaurantCardProps> = ({ restaurant }) => {
-  const route = useRouter();
   const dispatch = useAppDispatch();
   const [isDeleting, setIsDeleting] = useState(false);
   const [isEditing, setIsEditing] = useState(false); // State for managing the edit modal visibility
@@ -93,12 +91,11 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({ restaurant }) => {
         <p className="mt-1 text-gray-500">{restaurant.open_hours}</p>
       </div>
       <div className="bg-gray-100 p-4 rounded-b-lg">
-        <button
-          className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors duration-300"
-          onClick={() => route.push(`/dashboard/restaurants/${restaurant._id}`)}
-        >
-          Batafsil
-        </button>
+        <Link href={`/dashboard/restaurants/${restaurant._id}`}>
+          <Button className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors duration-300">
+            Batafsil
+          </Button>
+        </Link>
       </div>
 
       <Dialog open={isEditing} onOpenChange={setIsEditing}>

@@ -1,48 +1,40 @@
 "use client";
 
-import React, { useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
-import { Building2, Menu, X } from "lucide-react";
+import React from "react";
+import { usePathname } from "next/navigation";
+import { Building2, User2 } from "lucide-react";
 import Link from "next/link";
 import { ModeToggle } from "../mode-toggle";
 
 const Sidebar = () => {
-  const router = useRouter();
   const pathname = usePathname();
 
-  const navigateTo = (path: string) => {
-    router.push(path);
-  };
-  const isActive = (path: string) => {
-    // Check if the current pathname starts with the given path
-    return pathname.startsWith(path);
+  const isActive = (href: string) => {
+    return pathname.startsWith(href);
   };
 
   return (
     <div>
       <div className="lg:w-64 w-16 lg:flex flex-col h-full bg-card text-white fixed hidden">
-        <nav
-          className={`lg:flex flex-col lg:static absolute top-0 left-0 lg:w-full w-64 h-full  z-50 ftrfansition-transform transform lg:translate-x-0`}
-        >
+        <nav className="lg:flex flex-col lg:static absolute top-0 left-0 lg:w-full w-64 h-full z-50 transition-transform transform lg:translate-x-0">
           <div className="p-4">
             <div className="flex items-center justify-between">
               <h2 className="text-xl font-bold text-center">Menu</h2>
               <ModeToggle />
             </div>
-
             <ul className="mt-6 space-y-4">
               {menuItems.map((item, index) => (
-                <li
+                <Link
+                  href={item.href}
                   key={index}
                   className={`cursor-pointer p-2 rounded-lg flex items-center gap-3 ${
-                    isActive("/dashboard/restaurants")
-                      ? "bg-gray-700"
-                      : "hover:bg-gray-700"
+                    isActive(item.href)
+                      ? "bg-blue-200 text-blue-600"
+                      : "hover:bg-gray-300 hover:text-gray-800"
                   }`}
-                  onClick={() => navigateTo("/dashboard/restaurants")}
                 >
                   {item.icon} {item.name}
-                </li>
+                </Link>
               ))}
             </ul>
           </div>
@@ -55,7 +47,7 @@ const Sidebar = () => {
               key={index}
               href={item.href}
               className={`py-2 px-6 rounded-md bg-gray-100 ${
-                pathname === item.href ? "bg-blue-200 text-blue-600" : ""
+                isActive(item.href) ? "bg-blue-200 text-blue-600" : ""
               }`}
             >
               {item.icon}
@@ -72,6 +64,11 @@ const menuItems = [
     href: "/dashboard/restaurants",
     icon: <Building2 size={24} />,
     name: "Restoranlar",
+  },
+  {
+    href: "/dashboard/users",
+    icon: <User2 size={24} />,
+    name: "Foydalanuvchilar",
   },
 ];
 

@@ -1,6 +1,6 @@
 "use client";
 import { IMenu, IMenuItem } from "@/models/Menu";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 
 const RestaurantMenus = ({ menus }: { menus: IMenu }) => {
   console.log(menus);

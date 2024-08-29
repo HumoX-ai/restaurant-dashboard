@@ -29,3 +29,60 @@ export async function GET(
     );
   }
 }
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  await dbConnect().then(() => console.log("Connected to database"));
+  try {
+    const userId = params.id;
+    const user = await User.findByIdAndDelete(userId);
+    if (!user) {
+      return NextResponse.json(
+        { success: false, message: "User not found" },
+        { status: 404 }
+      );
+    }
+    return NextResponse.json({ success: true, data: user }, { status: 200 });
+  } catch (error) {
+    let errorMessage = "An unknown error occurred";
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+    return NextResponse.json(
+      { success: false, error: errorMessage },
+      { status: 400 }
+    );
+  }
+}
+
+export async function PATCH(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  await dbConnect().then(() => console.log("Connected to database"));
+  try {
+    const userId = params.id;
+    const requestBody = await request.json();
+    const user = await User.findByIdAndUpdate(userId, requestBody, {
+      new: true,
+    });
+    if (!user) {
+      return NextResponse.json(
+        { success: false, message: "User not found" },
+        { status: 404 }
+      );
+    }
+    return NextResponse.json({ success: true, data: user }, { status: 200 });
+  } catch (error) {
+    let errorMessage = "An unknown error occurred";
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+    return NextResponse.json(
+      { success: false, error: errorMessage },
+      { status: 400 }
+    );
+  }
+}

@@ -1,4 +1,4 @@
-import RestaurantMenus from "@/components/dashboard/RestaurantMenuCard";
+import RestaurantMenus from "@/components/dashboard/restaurant/RestaurantMenuCard";
 import MenusLoading from "@/components/skleton/MenusLoading";
 import { getMenusByRestaurantId } from "@/lib/data";
 import { IMenu } from "@/models/Menu";

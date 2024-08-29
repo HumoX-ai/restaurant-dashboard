@@ -2,9 +2,9 @@
 import { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import SkeletonLoader from "@/components/skleton/RestaurantsLoading";
-import RestaurantsList from "@/components/dashboard/RestaurantsList";
+import RestaurantsList from "@/components/dashboard/restaurant/RestaurantsList";
 import { fetchRestaurants } from "@/store/restaurantsSlice";
-import AddRestaurantButton from "@/components/dashboard/AddRestaurantButton";
+import AddRestaurantButton from "@/components/dashboard/restaurant/AddRestaurantButton";
 
 const RestaurantsPage: React.FC = () => {
   const dispatch = useAppDispatch();
